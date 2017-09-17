@@ -221,7 +221,6 @@ int main(int argc, char *argv[]){
 		goto end;
 	}
 	fwrite(outData.pData, outData.length, 1, outFile);
-	//fputs(outData.pData, outFile);
 	if(argc > 2)
 		fclose(outFile);
 
