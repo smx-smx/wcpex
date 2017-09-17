@@ -1,5 +1,5 @@
 /*
- * Exctraction tool for files handled by WCP - Windows Componentization Platform
+ * Extraction tool for files handled by WCP - Windows Componentization Platform
  * Copyright 2017 Smx <smxdev4@gmail.com>
  * 
  * Program to unpack and (TODO) repack Manifest files, like the ones found in
