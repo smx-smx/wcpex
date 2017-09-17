@@ -39,10 +39,10 @@ static long (__fastcall *DeltaDecompressBuffer)(
 	struct BlobData *outData
 );
 static long (__fastcall *LoadFirstResourceLanguageAgnostic)(
-	uintptr_t,
-	HMODULE hModule,
-	LPCWSTR lpType,
-	LPCWSTR lpName,
+	uint32_t unused,
+	HINSTANCE hModule,
+	uint16_t lpType,
+	uint16_t lpName,
 	void *pOutDict
 );
 
@@ -174,8 +174,8 @@ int main(int argc, char *argv[]){
 		wcp, //HMODULE
 
 		// These seem to have a special meaning
-		(LPCWSTR)0x266, //lpType
-		(LPCWSTR)1, //lpName
+		0x266, //lpType (unsure)
+		1, //unknown
 
 		&DictData
 	);
