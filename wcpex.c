@@ -155,8 +155,7 @@ int main(int argc, char *argv[]){
 	fprintf(stderr, "Type is %d\n", type);
 
 	if(type != 4){
-		fprintf(stderr, "Unsupported compression type '%d'\n", type);
-		goto end;
+		fprintf(stderr, "WARNING: Untested compression type '%d'\n", type);
 	}
 
 	result = InitializeDeltaCompressor((uintptr_t)NULL);
