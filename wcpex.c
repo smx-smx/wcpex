@@ -144,7 +144,7 @@ int main(int argc, char *argv[]){
 	fread(manifestData, dataSize, 1, f);
 	fclose(f);
 
-	printf("Size: %u\n", dataSize);
+	fprintf(stderr, "Size: %u\n", dataSize);
 
 	struct BlobData inData = {
 		.length = dataSize,
@@ -152,25 +152,25 @@ int main(int argc, char *argv[]){
 		.pData = (void *)manifestData
 	};
 	unsigned long type = GetCompressedFileType(&inData);
-	printf("Type is %d\n", type);
+	fprintf(stderr, "Type is %d\n", type);
 
 	if(type != 4){
-		printf("Unsupported compression type '%d'\n", type);
+		fprintf(stderr, "Unsupported compression type '%d'\n", type);
 		goto end;
 	}
 
 	result = InitializeDeltaCompressor((uintptr_t)NULL);
-	printf("InitializeDeltaCompressor: 0x%08X\n", result);
+	fprintf(stderr, "InitializeDeltaCompressor: 0x%08X\n", result);
 	if(result >= 0){
 		result = 0;
 	} else {
-		printf("InitializeDeltaCompressor failed\n");
+		fprintf(stderr, "InitializeDeltaCompressor failed\n");
 		goto end;
 	}
 
 	uint64_t DictData[3];
 	result = LoadFirstResourceLanguageAgnostic(
-		0, //unneded
+		0, //unused
 		wcp, //HMODULE
 
 		// These seem to have a special meaning
@@ -180,7 +180,7 @@ int main(int argc, char *argv[]){
 		&DictData
 	);
 
-	printf("LoadFirstResourceLanguageAgnostic: 0x%08X\n", result);
+	fprintf(stderr, "LoadFirstResourceLanguageAgnostic: 0x%08X\n", result);
 	if(result >= 0){
 		result = 0;
 	} else {
@@ -188,8 +188,8 @@ int main(int argc, char *argv[]){
 		goto end;
 	}
 
-	printf("==> Dictionary\n");
-	hexdump(&DictData, sizeof(DictData));
+	//printf("==> Dictionary\n");
+	//hexdump(&DictData, sizeof(DictData));
 
 
 	struct BlobData outData;
@@ -200,7 +200,7 @@ int main(int argc, char *argv[]){
 		&inData,
 		&outData
 	);
-	printf("DeltaDecompressBuffer: 0x%08X\n", result);
+	fprintf(stderr, "DeltaDecompressBuffer: 0x%08X\n", result);
 	if(result >= 0){
 		result = 0;
 	} else {
@@ -208,7 +208,7 @@ int main(int argc, char *argv[]){
 		goto end;
 	}
 
-	printf("==> Out Blob\n");
+	fprintf(stderr, "==> Out Blob\n");
 	//hexdump(&outData, sizeof(outData));
 	FILE *outFile;
 	if(argc < 3)
