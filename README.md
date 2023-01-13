@@ -16,4 +16,4 @@ Requires a wcp.dll from the servicing stack in the search path or the same direc
 * cd c:\windows\winsxs
 * dir /s wcp.dll
 * copy the latest version to the folder of your choice
-* copy "C:\Windows\WinSxS\x86_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.19041.2300_none_21f65238c42b469f\wcp.dll" c:\temp\manifest
+* copy "c:\Windows\WinSxS\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.19041.2300_none_7e14edbc7c88b7d5\wcp.dll" c:\temp\manifest
