@@ -1,8 +1,7 @@
 # wcpex
 A tool to extract Windows Manifest files that can be found in the WinSxS folder
 
-This fork fixes an issue 0xC0070715 in LoadFirstResourceLanguageAgnostic.
-64 Bit version. Compiles in Visual Studio 2022 with cl.exe
+Compiles in Visual Studio 2022 with cl.exe
 
 Compiling instructions:
 
