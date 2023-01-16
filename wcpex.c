@@ -13,11 +13,17 @@
 #include <stdio.h>
 #include <stdint.h>
 
-struct __attribute__((packed)) BlobData {
+
+#ifdef _MSC_VER
+#define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))
+#endif
+
+PACK(struct BlobData
+{
 	size_t length;
 	size_t fill;
 	void *pData;
-};
+});
 
 static HMODULE wcp;
 static long (__fastcall *InitializeDeltaCompressor)(uintptr_t arg);
@@ -38,11 +44,21 @@ static long (__fastcall *DeltaDecompressBuffer)(
 	struct BlobData *inData,
 	struct BlobData *outData
 );
+/*
 static long (__fastcall *LoadFirstResourceLanguageAgnostic)(
 	uint32_t unused,
 	HINSTANCE hModule,
 	uint16_t lpType,
 	uint16_t lpName,
+	void *pOutDict
+);
+*/
+
+static long (__fastcall *LoadFirstResourceLanguageAgnostic)(
+	unsigned long unused,
+	HINSTANCE hModule,
+	unsigned short const * lpType,
+	unsigned short const * lpName,
 	void *pOutDict
 );
 
@@ -144,7 +160,7 @@ int main(int argc, char *argv[]){
 	fread(manifestData, dataSize, 1, f);
 	fclose(f);
 
-	fprintf(stderr, "Size: %u\n", dataSize);
+	fprintf(stderr, "Size: %zu\n", dataSize);
 
 	struct BlobData inData = {
 		.length = dataSize,
