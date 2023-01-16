@@ -16,6 +16,8 @@
 
 #ifdef _MSC_VER
 #define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))
+#else
+#define PACK( __Declaration__ ) __Declaration__ __attribute__((packed))
 #endif
 
 PACK(struct BlobData
@@ -189,8 +191,8 @@ int main(int argc, char *argv[]){
 		wcp, //HMODULE
 
 		// These seem to have a special meaning
-		0x266, //lpType (unsure)
-		1, //unknown
+		(unsigned short const *) 0x266, //lpType (unsure)
+		(unsigned short const *) 1, //unknown
 
 		&DictData
 	);
